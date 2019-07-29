@@ -145,12 +145,3 @@ We are grateful for the support from the members of the [Krishnan Lab](https://w
 * Subramanian A, Tamayo P, Mootha VK, Mukherjee S, Ebert BL, Gillette MA, Paulovich A, Pomeroy SL, Golub TR, Lander ES, Mesirov JP. (2005) Gene set enrichment analysis: a knowledge-based approach for interpreting genome-wide expression profiles. _Proceedings of the National Academy of Sciences U.S.A._ 43:15545-50.
 * Liberzon A, Subramanian A, Pinchback R, Thorvaldsdóttir H, Tamayo P, Mesirov JP. (2011) Molecular signatures database (MSigDB) 3.0. _Bioinformatics_ 12:1739-40. 
 
-
-## TODO before making it public
-Rerun everything to make sure the the results are consistent. Publish the 'fresh' results.
-* main result
-* mdlsel result
-* geneset properties
-* figures
-* Add the time it takes to run the code to regenerate the results on a single machine
-* Change figures to figures_tables and make sure all the script call this new directory
