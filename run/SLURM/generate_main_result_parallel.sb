@@ -1,0 +1,31 @@
+#!/bin/bash -login
+#SBATCH -t 2:00:00
+#SBATCH -N 1
+#SBATCH -c 5
+#SBATCH --mem=40GB
+#SBATCH --array=0-23
+
+cd $SLURM_SUBMIT_DIR
+homedir=$(realpath ../..)
+
+ID=$SLURM_ARRAY_TASK_ID
+out=$homedir/results/main_result_new.tsv
+tmpout=$out-$ID
+networks=( GIANT-TN STRING BioGRID STRING-EXP )
+gscs=( GOBP MGI DisGeNet BeFree GOBPtmp GWAS )
+
+network=${networks[$(expr $ID / 6)]}
+gsc=${gscs[$(expr $ID % 6)]}
+
+echo $network $gsc
+if [ $ID == 0 ]
+	then echo $'Geneset\tScore\tScore Type\tMethod\tValidation Split\tGeneset Collection\tNetwork' > $out
+	JOBID=$SLURM_ARRAY_JOB_ID
+	echo $JOBID
+	echo $out
+	sbatch --dependency=afterany:$JOBID aggregate.sb $out $JOBID
+	echo 
+fi
+
+cd $homedir/src
+python main.py -n $network -c $gsc -m SL-A SL-I SL-E LP-A LP-I -s Holdout 5FCV -o $tmpout

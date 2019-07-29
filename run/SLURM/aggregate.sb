@@ -1,0 +1,43 @@
+#!/bin/bash -login
+#SBATCH -N 1
+#SBATCH -c 1
+#SBATCH -t 1:00
+#SBATCH --mem=1GB
+
+cd $SLURM_SUBMIT_DIR
+sub_dir=$(realpath .)
+homedir=$(realpath ../..)
+
+out=$1
+JOBID=$2
+hist_dir=$homedir/slurm_history
+hist_file=$hist_dir/slurm-$JOBID\.out
+
+if [ ! -d $hist_dir ]
+	then mkdir $hist_dir
+fi
+touch $hist_file
+
+echo out=$out
+echo JOBID=$JOBID
+echo sub_dir=$sub_dir
+echo homedir=$homedir
+echo hist_dir=$hist_dir
+echo hist_file=$hist_file
+
+for i in $(ls $out-*)
+	do echo $i
+	sed -n '2,$p' $i >> $out
+	rm -f $i
+done
+
+for i in $(ls $sub_dir/slurm-"$JOBID"_*)
+	do echo $i
+	echo $(basename $i) >> $hist_file
+	cat $i >> $hist_file
+	echo >> $hist_file
+	rm -f $i
+done
+
+cat $sub_dir/slurm-$SLURM_JOB_ID.out >> $hist_file
+rm -f $sub_dir/slurm-$SLURM_JOB_ID.out

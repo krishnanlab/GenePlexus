@@ -1,0 +1,8 @@
+Geneset Collection	Number of Genes	Number of Genesets	Range of Geneset sizes	Median Geneset size
+GOBPtmp	9038	150	(29, 450)	174.5
+GOBP	5071	96	(20, 176)	77.0
+KEGGBP	3244	70	(23, 179)	51.0
+DisGeNet	4376	104	(22, 354)	67.0
+BeFree	2554	56	(20, 212)	80.5
+GWAS	1733	34	(24, 372)	99.5
+MGI	2414	113	(20, 132)	42.0
