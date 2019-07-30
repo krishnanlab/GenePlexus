@@ -28,7 +28,12 @@ def genfig(result_df, figname, score_type, valsplit, method_lst):
 			else:
 				ax.set_ylabel('')
 
-	plt.legend(loc='center', bbox_to_anchor=(-0.16,-0.26), frameon=False, \
+	handles, _ = ax.get_legend_handles_labels()
+	if 'LP' in method_lst[0]: #format lengends to beta values
+		labels = ['%.2f'%(float(i[-2:])/100) for i in method_lst]
+	else:
+		labels = method_lst
+	plt.legend(handles, labels, loc='center', bbox_to_anchor=(-0.16,-0.26), frameon=False, \
 		ncol=len(method_lst), fontsize=fontsize)
 	fig.tight_layout(rect=[0, 0, 1, 1])
 	fig.subplots_adjust(wspace=0.12 if score_type == 'auROC' else 0.08, hspace=0.16)
