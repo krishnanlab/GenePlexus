@@ -42,12 +42,13 @@ def genfig(result_df, figname, score_type, valsplit):
 	for i, method2 in enumerate(['LP-I', 'SL-A']):
 		f, p, annot = pairtests(result_df, method1, method2, score_type, valsplit)
 		sns.heatmap(data=f, annot=annot, cmap='PuOr', center=0.5, vmin=0,vmax=1, ax=axes[i], fmt='', \
-			cbar_kws={'orientation': 'horizontal'}, cbar_ax=fig.add_axes([.18, 0.048, .7, .022]))
+			cbar_kws={'orientation': 'horizontal', 'label':'Percentage of times SL-E outperforms the other method'}, \
+			cbar_ax=fig.add_axes([.18, 0.07, .7, .022]))
 		axes[i].set_title('Wilcoxon test %s vs %s'%('SL-E', method2))
 		fix_annot_color(axes[i])
 		axes[i].annotate(panel_annot_lst[i]+')', fontweight='bold',\
 				xy=(-0.17, 1.05), xycoords='axes fraction', fontsize=11)
-	fig.tight_layout(rect=[0, 0.07, 1, 1])
+	fig.tight_layout(rect=[0, 0.095, 1, 1])
 	plt.savefig(fig_dir + figname)
 	plt.close()
 
