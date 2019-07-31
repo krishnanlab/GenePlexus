@@ -23,7 +23,7 @@ def genfig(result_df, figname):
 			sns.heatmap(test_score_combined_df, annot=annot_df, fmt='',ax=axes[i,j], \
 				center=0.5, cmap='coolwarm', vmin=0, vmax=1, \
 				cbar_kws={"orientation": "horizontal"}, \
-				cbar_ax=fig.add_axes([.18, 0.05, .7, .027]))
+				cbar_ax=fig.add_axes([.18, 0.074, .7, .02]))
 			helperfun.bold_text(axes[i,j], textsize=7)
 
 			axes[i,j].set_xlabel('')
@@ -34,6 +34,9 @@ def genfig(result_df, figname):
 				axes[i,j].get_xaxis().set_ticklabels([])
 			if i == 0:
 				axes[i,j].set_title(score_type, fontsize=12, fontweight='bold')
+
+	#add colorbar label
+	fig.text(0.5, 0.02, 'Percentage of times SL outperforms LP', fontsize=10, ha='center')
 
 	plt.savefig(fig_dir + figname)
 	plt.close()

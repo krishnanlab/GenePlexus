@@ -2,9 +2,9 @@ from commonvar import *
 
 def genfig(result_df, figname, score_type, valsplit):
 	if valsplit == '5FCV':
-		fig,axes = plt.subplots(1, 2, figsize=(5.4,3), gridspec_kw={'width_ratios':[2, 4]}, sharex='col', sharey=True)
+		fig,axes = plt.subplots(1, 2, figsize=(5.8,3), gridspec_kw={'width_ratios':[2, 4]}, sharex='col', sharey=True)
 	else:
-		fig,axes = plt.subplots(1, 2, figsize=(6.3,3), gridspec_kw={'width_ratios':[3, 4]}, sharex='col', sharey=True)
+		fig,axes = plt.subplots(1, 2, figsize=(6.8,3), gridspec_kw={'width_ratios':[3, 4]}, sharex='col', sharey=True)
 
 	annot_df,test_score_combined_df = helperfun.performance_test(result_df, \
 										valsplit, score_type, method_class_dict, alpha)
@@ -20,13 +20,15 @@ def genfig(result_df, figname, score_type, valsplit):
 			annot=annot_df[grouped_gsc_lst[group_idx][offset:]], \
 			fmt='',ax=axes[group_idx], \
 			center=0.5,cmap='coolwarm',vmin=0,vmax=1, \
-			cbar_kws={"orientation": "horizontal"}, \
-			cbar_ax=None if 0 else fig.add_axes([.18, 0.08, .7, .03]) )
+			cbar_ax=None if 0 else fig.add_axes([.87, .15, .02, .7]) )
 		helperfun.bold_text(axes[group_idx])
 	axes[0].set_title('Function Prediction')
 	axes[1].set_title('Disease and Trait Prediction')
 
-	fig.tight_layout(rect=[0, 0.08, 1, 1])
+	#add colorbar label
+	fig.text(0.96, 0.83, 'Percentage of times SL outperforms LP', fontsize=8, ha='center', rotation='vertical')
+
+	fig.tight_layout(rect=[0, 0, 0.87, 1])
 	fig.subplots_adjust(hspace=0.08, wspace=0.08)
 	plt.savefig(fig_dir + figname)
 	plt.close()
