@@ -1,5 +1,5 @@
 # GenePlexus
-This repository contains data and code to generate the results and reproduce the figures and tables found in [_Supervised learning is an accurate method for network-based gene classification_](https://www.biorxiv.org/content/10.1101/721423v1) (submitted for review). This work focuses on comparing two classes of network-based gene classification methods: supervised learning (SL) and label propagation (LP). The comparison is performed systematically across diverse prediction tasks (functions, diseases, and traits) and molecular networks using meaningful validation schemes and evaluation metrics. Based on this extensive analysis, we find that supervised learning outperforms label propagation for gene classification, especially for function prediction.
+This repository contains data and code to generate the results and reproduce the figures and tables found in [_Supervised learning is an accurate method for network-based gene classification_](https://doi.org/10.1093/bioinformatics/btaa150) `Bioinformatics DOI: 10.1093/bioinformatics/btaa150`. This work focuses on comparing two classes of network-based gene classification methods: supervised learning (SL) and label propagation (LP). The comparison is performed systematically across diverse prediction tasks (functions, diseases, and traits) and molecular networks using meaningful validation schemes and evaluation metrics. Based on this extensive analysis, we find that supervised learning outperforms label propagation for gene classification, especially for function prediction.
 
 This repo provides: 
 1. The data, results, and figures presented in the manuscript.
@@ -97,7 +97,7 @@ See [LICENSE.md](https://github.com/krishnanlab/GenePlexus/LICENSE.md) for licen
 
 ### Citation
 If you use this work, please cite:  
-`To be added later`
+Liu R*, Mancuso CA*, Yannakopoulos A, Johnson KA, Krishnan A (2020) Supervised-learning is an accurate method for network-based gene classification. _Bioinformatics_ doi.org/10.1093/bioinformatics/btaa150.
 
 ### Authors
 Renming Liu#, Christopher A Mancuso#, Anna Yannakopoulos, Kayla A Johnson, Arjun Krishnan*
