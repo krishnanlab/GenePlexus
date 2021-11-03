@@ -14,7 +14,7 @@ emd_pth = home_dir + '/data/embeddings'
 all_networks = ['BioGRID', 'STRING-EXP', 'InBioMap', 'GIANT-TN', 'STRING']
 all_gscs = ['GOBPtmp', 'GOBP', 'KEGGBP', 'DisGeNet', 'BeFree', 'GWAS', 'MGI']
 all_valsplits = ['Holdout', '5FCV']
-all_methods = ['SL-A', 'SL-I', 'SL-E', 'LP-I', 'LP-A'] # add the name of new models to this list
+all_methods = ['SL-A', 'SL-I', 'SL-E', 'LP-I', 'LP-A', 'lopass-A'] # add the name of new models to this list
 
 score_type_dict = {
 	'auPRC':core.metrics.auPRC, 
@@ -94,6 +94,18 @@ def get_mdl_dict(methods, adjmat, infmat, emdmat):
 	if 'SL-E' in methods: mdl_dict['SL-E'] = core.models.SL(emdmat)
 	if 'LP-A' in methods: mdl_dict['LP-A'] = core.models.LP(adjmat)
 	if 'LP-I' in methods: mdl_dict['LP-I'] = core.models.LP(infmat)
+
+	if 'lopass-A' in methods:
+		P = adjmat.copy()
+		P._mat /= P._mat.sum(axis=1)
+		P._mat = (np.eye(P.size) + P._mat) / 2
+		for j in range(3): # lopass filtering up to scale J = 2
+			if j > 0:
+				P = P.copy()
+				P._mat = P._mat @ P._mat
+			mdl_dict[f'SL-lopass_J={j}-A'] = core.models.SL(P)
+			mdl_dict[f'LP-lopass_J={j}-A'] = core.models.LP(P)
+
 	# Add user model here
 	#if 'UserModel' in methods: md_dict['UserModel'] = core.models.UserModel(adjmat)
 	return mdl_dict
